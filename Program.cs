@@ -65,7 +65,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OfficeOpenXml; // Asegúrate de importar el espacio de nombres necesario.
+using OfficeOpenXml; 
 using System.IO;
 
 
@@ -73,21 +73,18 @@ class Program
 {
     static void Main()
     {
-        // Configurar la propiedad LicenseContext
+        
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-        // Definir la ruta del archivo Excel
-        //string filePath = @"C:\Users\leonardo.arellano\source\repos\VISUAL BASIC\INTENTO TUTORIAL 1\NuestraPrimeraAplicacionDeConsola\EXCEL\archivo.xlsx";
+
         string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MiAplicacion", "archivo.xlsx");
 
-
-        // Crear un nuevo archivo Excel
         using (var package = new ExcelPackage())
         {
-            // Agregar una hoja de trabajo al libro
+      
             var worksheet = package.Workbook.Worksheets.Add("MiHoja");
 
-            // Escribir datos en celdas
+   
             worksheet.Cells["A1"].Value = "Nombre";
             worksheet.Cells["B1"].Value = "Edad";
 
@@ -97,7 +94,7 @@ class Program
             worksheet.Cells["A3"].Value = "María";
             worksheet.Cells["B3"].Value = 25;
 
-            // Guardar el libro Excel en la ubicación especificada
+     
             package.SaveAs(new System.IO.FileInfo(filePath));
         }
 
@@ -113,49 +110,38 @@ using System.IO;
 
 class Program
 {
-    [STAThread] // Añade esta línea
+    [STAThread] 
     static void Main()
     {
-        // Crear una instancia del cuadro de diálogo SaveFileDialog
         SaveFileDialog saveFileDialog = new SaveFileDialog();
 
-        // Configurar propiedades del cuadro de diálogo
+
         saveFileDialog.Filter = "Archivos de Excel (*.xlsx)|*.xlsx|Todos los archivos (*.*)|*.*";
         saveFileDialog.Title = "Guardar archivo de Excel";
         saveFileDialog.DefaultExt = "xlsx";
 
-        // Mostrar el cuadro de diálogo y obtener la ubicación de guardado
+      
         if (saveFileDialog.ShowDialog() == DialogResult.OK)
         {
-            // Obtener la ruta de acceso seleccionada por el usuario
             string filePath = saveFileDialog.FileName;
 
-            // Obtener la carpeta de destino del archivo
             string folderPath = Path.GetDirectoryName(filePath);
 
-            // Verificar si la carpeta existe, y si no, crearla
+        
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
             }
 
-            // Aquí puedes guardar tu archivo de Excel en la ubicación seleccionada (filePath)
-            // Ejemplo:
-            // GuardarArchivoDeExcel(filePath);
         }
         else
         {
-            // El usuario canceló la operación
+
             Console.WriteLine("Operación cancelada por el usuario.");
         }
     }
 
-    // Método para guardar el archivo de Excel en la ubicación seleccionada
-    // Puedes implementar esta función según tus necesidades específicas
-    // private static void GuardarArchivoDeExcel(string filePath)
-    // {
-    //     // Aquí colocas el código para guardar el archivo de Excel en filePath
-    // }
+
 }
 */
 
@@ -171,29 +157,25 @@ class Program
     [STAThread]
     static void Main()
     {
-        // Crear una instancia del cuadro de diálogo SaveFileDialog
+   
         SaveFileDialog saveFileDialog = new SaveFileDialog();
 
-        // Configurar propiedades del cuadro de diálogo
         saveFileDialog.Filter = "Archivos de Excel (*.xlsx)|*.xlsx|Todos los archivos (*.*)|*.*";
         saveFileDialog.Title = "Guardar archivo de Excel";
         saveFileDialog.DefaultExt = "xlsx";
 
-        // Mostrar el cuadro de diálogo y obtener la ubicación de guardado
         if (saveFileDialog.ShowDialog() == DialogResult.OK)
         {
-            // Configurar la propiedad LicenseContext
+ 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-            // Obtener la ruta de acceso seleccionada por el usuario
             string filePath = saveFileDialog.FileName;
 
             using (var package = new ExcelPackage())
             {
-                // Agregar una hoja de trabajo al libro
+ 
                 var worksheet = package.Workbook.Worksheets.Add("MiHoja");
 
-                // Escribir datos en celdas
                 worksheet.Cells["A1"].Value = "Nombre";
                 worksheet.Cells["B1"].Value = "Edad";
 
@@ -203,30 +185,21 @@ class Program
                 worksheet.Cells["A3"].Value = "María";
                 worksheet.Cells["B3"].Value = 25;
 
-                // Guardar el libro Excel en la ubicación especificada
                 package.SaveAs(new System.IO.FileInfo(filePath));
             }
 
-            // Mostrar la ubicación del archivo en la consola
+    
             Console.WriteLine("El archivo se guardó en: " + filePath);
 
-            // Aquí puedes guardar tu archivo de Excel en la ubicación seleccionada (filePath)
-            // Ejemplo:
-            // GuardarArchivoDeExcel(filePath);
+    
             Console.ReadLine();
         }
         else
         {
-            // El usuario canceló la operación
+
             Console.WriteLine("Operación cancelada por el usuario.");
             
         }
     }
 
-    // Método para guardar el archivo de Excel en la ubicación seleccionada
-    // Puedes implementar esta función según tus necesidades específicas
-    // private static void GuardarArchivoDeExcel(string filePath)
-    // {
-    //     // Aquí colocas el código para guardar el archivo de Excel en filePath
-    // }
 }
